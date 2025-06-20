@@ -160,3 +160,30 @@ Lastly, two separate counter designs were also optimized during synthesis. There
 ![alt text](Day3/show_counter_opt2.png)  <br />
 
 ## Day 4 - GLS, blocking vs non-blocking and Synthesis-Simulation mismatch
+The topic of discussion for Day4 for that of gate-level simulation (GLS) wherein, we verify if the netlist synthesized using yosys behaves as per the original design. The netlist is stimulated using the same testbench as previously described in Day1. <br />
+
+The GLS flow is as shown below:
+![alt text](Day4/GLS_flow.png)  <br />
+
+When performing the GLS using iverilog, we use the following command <br />
+`iverilog <path to verilog file containing primitives> <path to verilog file for the cells in .lib file> <design.v> <tb_design.v>` <br />
+the steps following this remain unchanged. <br />
+
+For the design ternary_mux.v we first verify the design using iverilog and then perform the synthesis. The results are as shown:
+![alt text](Day4/ternary_mux.png)  <br />
+![alt text](Day4/show_ternary_mux.png)  <br />
+Following synthesis, we perform the GLS for ternary_mux and the result is:
+![alt text](Day4/ternary_mux_gls.png)  <br />
+
+We also saw that there can be synthesis simulation mismathces which can cause the synthesized design to behave differently than expected. To drive this point we take the following two designs: <br />
+- bad_mux.v: The missing sensitivity list results in the synthesis-simulation mismatch. <br />
+Results of the verilog design: <br />
+![alt text](Day4/bad_mux.png)  <br />
+Results of the synthesized netlist: <br />
+![alt text](Day4/bad_mux_net.png)  <br />
+
+- blocking_caveat.v: The blocking assignment statements cause the synthesis simulation mismatch.<br />
+Results of the verilog design: <br />
+![alt text](Day4/blocking_caveat.png)  <br />
+Results of the synthesized netlist: <br />
+![alt text](Day4/blocking_caveat_net.png)  <br />
