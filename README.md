@@ -77,6 +77,14 @@ instead of the `show` command we usually run since this represents the hierarchi
 The concept of module-level synthesis was also introduced and is preferred when we have multiple instances of the same module. The result of performing the module-level synthesis for sub-module1 in multiple_modules.v is: <br />
 ![alt text](Day2/show_sub_module1.png)  <br />
 
+When trying to write the netlist of a design containing hierarchies we use: <br />
+`flatten` <br />
+before executing the `write_verilog ..` command to flatten out the hierarchies. <br />
+
+If there any D flip-flops present in the design we need to run <br />
+`dfflibmap -liberty  <path-to-lib-file>` <br />
+after the `synth -top ...` command since in certain cases the flop libraries and standard cell libraries are kept separate.
+
 We also saw variations of the D flip-flop which are described below along with their simulation and synthesis results:
 - Asynchronous reset D flip-flop (dff_asyncres.v): The reset signal of the flip-flop is independent of the clock <br />
 ![alt text](Day2/async_res.png)  <br />
@@ -102,7 +110,53 @@ Finally, we also explored some synthesis optimizations for the designs described
 ![alt text](Day2/show_mul8.png)  <br />
 
 ## Day 3 - Combinational and sequential optmizations
+On Day3, the various types of optimization strategies for both combination and sequential circuits were introduced. When, performing the constant propagation optimization we need to run <br />
+`opt_clean -purge` <br />
+after running the `synth -top ...` command. <br />
 
+The following combinational circuit designs were considered when trying to perform the optimization during synthesis:
+- opt_check.v <br />
+![alt text](Day3/show_opt_check.png)  <br />
 
+- opt_check2.v <br />
+![alt text](Day3/show_opt_check2.png)  <br />
+
+- opt_check3.v <br />
+![alt text](Day3/show_opt_check3.png)  <br />
+
+- opt_check4.v <br />
+![alt text](Day3/show_opt_check4.png)  <br />
+
+- multiple_module_opt.v <br />
+![alt text](Day3/show_mm_opt.png)  <br />
+Note: In this case we needed to first flatten the hierarchies before performing the optimization purge. <br />
+
+In addition to the combinational designs mentioned above, several sequential circuit designs were also considered when trying to perform the optimization during synthesis:
+- dff_const1.v <br />
+![alt text](Day3/dff_const1.png)  <br />
+![alt text](Day3/show_dff_const1.png)  <br />
+
+- dff_const2.v <br />
+![alt text](Day3/dff_const2.png)  <br />
+![alt text](Day3/show_dff_const2.png)  <br />
+
+- dff_const3.v <br />
+![alt text](Day3/dff_const3.png)  <br />
+![alt text](Day3/show_dff_const3.png)  <br />
+
+- dff_const4.v <br />
+![alt text](Day3/dff_const4.png)  <br />
+![alt text](Day3/show_dff_const4.png)  <br />
+
+- dff_const5.v <br />
+![alt text](Day3/dff_const5.png)  <br />
+![alt text](Day3/show_dff_const5.png)  <br />
+
+Lastly, two separate counter designs were also optimized during synthesis. There are:
+- counter_opt.v: Only one bit of the counter is connected to the final output hence the unused bits are optimized. <br />
+![alt text](Day3/show_counter_opt.png)  <br />
+
+- counter_opt2.v: All bits of the counter are connected to the final output in this case. <br />
+![alt text](Day3/show_counter_opt2.png)  <br />
 
 ## Day 4 - GLS, blocking vs non-blocking and Synthesis-Simulation mismatch
