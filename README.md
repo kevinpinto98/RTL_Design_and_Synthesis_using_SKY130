@@ -64,9 +64,42 @@ The simplified version of this netlist is: <br />
 ![alt text](Day1/netlist_simplified_good_mux.png)  <br />
 
 ## Day 2 - Timing libs, hierarchical vs flat synthesis and efficient flop coding styles
+On the second day of the workshop, the various types of standard cells such as fast, slow and typical were discussed. These cells ensure that Process-Voltage-Temperature (PVT) variations do not have a serious impact on the working of the chip. <br />
 
+In addition, the difference between hierarchical and flat synthesis was also introduced. When trying to synthesize the design described in multiple_modules.v we see an error as shown below: <br />
+![alt text](Day2/show_err_mm.png)  <br />
 
+This can be resolved by running the command <br />
+`show multiple_modules` <br />
+instead of the `show` command we usually run since this represents the hierarchical design. The result of using this is: <br />
+![alt text](Day2/show_mm_flat.png)  <br />
 
+The concept of module-level synthesis was also introduced and is preferred when we have multiple instances of the same module. The result of performing the module-level synthesis for sub-module1 in multiple_modules.v is: <br />
+![alt text](Day2/show_sub_module1.png)  <br />
+
+We also saw variations of the D flip-flop which are described below along with their simulation and synthesis results:
+- Asynchronous reset D flip-flop (dff_asyncres.v): The reset signal of the flip-flop is independent of the clock <br />
+![alt text](Day2/async_res.png)  <br />
+![alt text](Day2/show_asyncres.png)  <br />
+
+- Asynchronous set D flip-flop (dff_async_set.v): The set signal of the flip-flop is independent of the clock <br />
+![alt text](Day2/async_set.png)  <br />
+
+- Synchronous reset D flip-flop (dff_syncres.v): The reset signal of the flip-flop is dependent on the positive edge of the clock <br />
+![alt text](Day2/sync_res.png)  <br />
+![alt text](Day2/show_syncset.png)  <br />
+
+- Asynchronous + Synchronous reset D flip-flop (dff_asyncres_synncres.v): There are two reset signals for the flip-flop, one which depends on the positive edge of the clock and the other which is independent of the clock <br />
+![alt text](Day2/async_sync_res.png)  <br />
+![alt text](Day2/show_async_sync.png)  <br />
+
+Finally, we also explored some synthesis optimizations for the designs described in mult_2.v and mult_8.v.
+
+- For mult_2.v
+![alt text](Day2/show_mul2.png)  <br />
+
+- For mult_8.v
+![alt text](Day2/show_mul8.png)  <br />
 
 ## Day 3 - Combinational and sequential optmizations
 
