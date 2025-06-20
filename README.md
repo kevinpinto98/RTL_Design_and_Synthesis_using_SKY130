@@ -187,3 +187,50 @@ Results of the verilog design: <br />
 ![alt text](Day4/blocking_caveat.png)  <br />
 Results of the synthesized netlist: <br />
 ![alt text](Day4/blocking_caveat_net.png)  <br />
+
+## Day 5 - Optimization in synthesis
+For the first part of the final day we focused on the dangers of using incomplete if statements (without using else) and incomplete case statements (without default case or only using partial assignments). These may results in latches being inferred which then may cause unexpected behaviour of the design. <br />
+
+The following designs were explored to illustrate this: <br />
+- incomp_if.v <br />
+![alt text](Day5/incomp_if.png)  <br />
+![alt text](Day5/show_incomp_if.png)  <br />
+
+- incomp_if2.v <br />
+![alt text](Day5/incomp_if2.png)  <br />
+![alt text](Day5/show_incomp_if2.png)  <br />
+
+- incomp_case.v <br />
+![alt text](Day5/incomp_case.png)  <br />
+![alt text](Day5/show_incomp_case.png)  <br />
+
+- comp_case.v <br />
+![alt text](Day5/comp_case.png)  <br />
+![alt text](Day5/show_comp_case.png)  <br />
+
+- bad_case.v <br />
+![alt text](Day5/bad_case.png)  <br />
+![alt text](Day5/show_bad_case.png)  <br />
+The GLS results for this case is: <br>
+![alt text](Day5/bad_case_gls.png)  <br />
+
+In the second and final part of Day5 the difference between for loop and for-generate loops was discussed. While the for loop is used for evaluating expressions, the for-generate loop can be used to instantiate a design multiple times within a large design. <br />
+
+The following examples were used to understand this concept: <br />
+- mux_generate.v
+![alt text](Day5/mux_generate.png)  <br />
+![alt text](Day5/show_mux_generate.png)  <br />
+The GLS results for this case is: <br>
+![alt text](Day5/mux_generate_gls.png)  <br />
+
+- demux_case.v
+![alt text](Day5/demux_case.png)  <br />
+![alt text](Day5/show_demux_case.png)  <br />
+
+- demux_generate.v
+![alt text](Day5/demux_generate.png)  <br />
+![alt text](Day5/show_demux_generate.png)  <br />
+
+- rca.v
+![alt text](Day5/rca.png)  <br />
+![alt text](Day5/show_rca.png)  <br />
